@@ -2,14 +2,35 @@
   <head>
     <title>Jounce</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="lib/style.css" media="screen" />
   </head>
 
   <body>
-    <canvas id="canvas"></canvas>
+    <img id="title" src="lib/jounce_title1.png" alt="" />
+
+    <canvas id="canvas">
+      <div id="instructions" class="instructions">
+        <h2>Instructions</h2>
+        <p>
+          You have been transported to the world of Tron and now have to escape.
+          Guide your ship along the lines, making sure to pick up all the
+          energy balls so that you don't lose power.
+          Watch out, the more energy you gather, the faster you'll go...
+
+          Left = Left Arrow Key
+          Right = Right Arrow Key
+          Start = Spacebar
+          Pause = P
+
+          Good luck.
+        </p>
+      </div>
+    </canvas>
     <audio loop id="audioEl">
       <source src="lib/song1.mp3">
     </audio>
-    <button id="toggle_play">Play/Pause</button>
+    <br></br><button id="toggle_mute">Mute</button>
 
     <script type="application/javascript" src="lib/bundle.js"></script>
   </body>
