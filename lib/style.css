@@ -122,8 +122,17 @@ body {
   /*width: 390px;*/
   text-align: center;
   z-index: 5;
+}
 
-
+#retry_container {
+  position: fixed;
+  top: 150px;
+  left: 10%;
+  right: 10%;
+  height: 0;
+  /*width: 390px;*/
+  text-align: center;
+  z-index: 5;
 }
 
 .instructions {
