@@ -140,8 +140,12 @@ body {
   color: #18CAE6;
   text-align: center;
   padding: 5px;
-  display: block;
-  margin: auto;
+  /*display: block;*/
+  /*margin: auto;*/
+  position: fixed;
+  bottom: 10%;
+  right: 18%;
+  z-index: 2;
   border: 2px solid #18CAE6;
   border-radius: 5px;
 }
