@@ -107,7 +107,7 @@ body {
   top: 608px;
   bottom: 0;
   background-color: black;
-  background-image: url("controls.png");
+  background-image: url("../assets/controls.png");
   background-position: center;
   background-repeat: no-repeat;
   border: 2px solid #303030;
