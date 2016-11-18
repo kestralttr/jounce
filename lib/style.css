@@ -87,6 +87,7 @@ body {
   margin: auto;
   border: 2px solid #303030;
   border-bottom: 1px solid #303030;
+  position: relative;
 
   /*float:left;*/
   /*position: relative;*/
@@ -112,22 +113,40 @@ body {
   border: 2px solid #303030;
 }
 
-.instructions {
+#instructions_container {
   position: fixed;
-  font-family: orbitron;
+  top: 150px;
+  left: 10%;
+  right: 10%;
+  height: 0;
+  /*width: 390px;*/
+  text-align: center;
+  z-index: 5;
+
+
+}
+
+.instructions {
+  /*position: fixed;
   font-size: 16px;
   overflow: auto;
-  color: #18CAE6;
-  /*top: 20%;
-  left: 30%;
-  right: 30%;
-  bottom: 20%;*/
   top: 130px;
   width: 25%;
-  left: 37.5%;
+  left: 50%;
+  margin-left: -50px;
   max-height: 480px;
+  max-width: 390;
   text-align: center;
-  z-index: 1;
+  z-index: 1;*/
+  font-family: orbitron;
+  margin: 0 20% 10% 20%;
+  color: #18CAE6;
+  display: inline-block;
+  text-align: center;
+  /*background-color: red;*/
+  max-width: 390px;
+  max-height: 430px;
+    overflow: auto;
 }
 
 .disappear {
