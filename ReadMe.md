@@ -2,73 +2,38 @@
 
 ## Background
 
-Jounce is a revamped rhythm game, similar to Rockband or Guitar Hero.  This gameplay is combined with music and visual elements from Tron and various 80s pop culture themes.
+Jounce is a retro 1980s arcade game, incorporating the themes of Tron with elements from various rhythm games like Rockband or Guitar Hero.  The live version can be found at https://kestralttr.github.io/jounce/.
 
-Four vertical lines in the game show the potential trajectories along which incoming Notes travel from the top of the screen to the bottom.  The player controls a Sprite at the bottom of the screen.  The left and right arrow keys can move the Sprite left and right, jumping to the whatever line is next to the line the Sprite is currently occupying.  This allows the player to move the Sprite across the four lines, attempting to "catch" the Notes before they leave the bottom of the screen.  Notes can only be caught my tapping the spacebar while a Note is in contact with the Sprite.
+Four vertical lines show the incoming trajectories that incoming energy packets can travel from the top of the screen to the bottom.  The circular item at the bottom of the screen is the sprite, or the ship that the player controls.  The player moves the sprite left and right to catch all the energy.  Missing too many energy packets results in a game over.
 
-![view](wireframes/Jounce Main.png)
+![view](docs/wireframes/Jounce Final.png)
 
-## Functionality & MVP
+## Instructions
 
-In Jounce, players can look forward to doing the following:
+Controls are quite simple.  The left and right arrow keys move the sprite in the corresponding directions, while space starts (or restarts a game) and the 'P' key pauses the game.  A mute button is available to silence the game if desired.
 
-- Use arrow keys and the spacebar to manipulate their Sprite into position to catch incoming Notes.
-- Upon catching or missing Notes, the game elements will change color.
-- Pause and unpause the game (which will mute/unmute music).
+Sound effects will mark various events, like grabbing an energy packet, missing an energy packet, and losing the game.  Visual cues are also available, with the entire game changing color every time an energy packet is missed, from blue to yellow to orange to red.  Energy packets will speed up gradually over time, with the game becoming increasingly more difficult the longer it is played.
 
-Extra goodies:
+## Technologies & Strategies
 
-- An intro screen that will display the rules of the game, along with a key map.
-- A production ReadMe.
+Jounce is written in JavaScript, relying heavily on HTML5 Canvas, while also using jQuery.  The game runs on a setInterval method that has a refresh rate of 60 frames a second.  A single class (gameView) is responsible for keeping track of the game's state data, and passes this data into various imported classes and methods in order to dynamically refresh the canvas.
 
-## Architecture and Technologies
+An interesting aspect of Jounce is generating the illusion of movement.  A major step towards achieving this relies on the generation of an infinite background loop, which appears as if your sprite is flying over 1980s circuitry for the duration of a game.  This effect was crafted by creating an image that has a top border that fits seamlessly against the bottom border.  A new image file is created, which takes this background image and duplicates it so that there are two identical background images, one above the other.  This new image file is then imported into Canvas, and changes its y-coordinates over time.  However, since there are two background images next to each other, there is another position at any given y-coordinate where the image file will look exactly the same.  After identifying the other position, it's simply a matter of instructing Canvas to jump back to the first position when it reaches the second that allows the background to appear that it is infinitely looping.  The snippet below shows the simple code necessary once the positions have been calculated (matte refers to the looping background):
 
-- Vanilla JavaScript and jquery will be used for the structure and logic of the game.
-- HTML5 Canvas will be used to render and manipulate the DOM.
-- Webpack will bundle and serve the relevant scripts.
+  if (this.matteY >= -300) {
+    this.matteY = -1100;
+  }
+  const matteObj = new Matte(this.ctx,this.matteY,this.matteMovY);
+  matteObj.drawMatte();
 
-The scripts used to create and run the game will include the following:
+  this.matteY += this.matteMovY;
 
-- render.js
-  - This script will render all elements to the DOM.
+The CSS involved with creating the feel of an arcade game relies on various container tags wrapping backgrounds, images, and text where applicable.  In order to ensure that the feel of a 1980s arcade machine is clear across a myriad of dimensions and screen sizes, many of the HTML elements have been positioned directly, allowing for their persistence even when the window is resized.
 
-- logic.js
-  - This script will handle all the behind-the-scenes logic that determines the values that will affect the rendering of the display.  It will analyze all existing elements and perform the necessary calculations to return a new state.
+All audio effects are established in HTML and use jQuery to enable or disable them.  Since the entry file has direct access to the index file, all audio commands and keybindings are done in entry.js.
 
-- elements.js
-  - This script holds the details and functions directly related to the elements that are included in the game.
+## Future Features
 
-## Implementation Timeline
+There are a number of additional features that are planned for this game.  First of all, some sort of counter that would allow you to regain health would allow for more forgiving gameplay.  Conversely, it would be fairly straightforward to add "bad" energy packets that would be marked in a different color and would harm you rather than help you.
 
-### Day 1
-Set up the project scripts, along with webpack.  Review HTML5 Canvas commands and structure.  Set up the entry file and a working render class.
-
-- Successful webpack installation
-- Entry file and framework of all three script files.
-
-### Day 2
-Focus on programming Sprite movement between lines.  Also complete creation, movement, and expiration of Notes.  Notes should expire when they extend collide with the bottom of the screen.
-
-- Working Sprite element is bound to arrow keys and jumps between lines.
-- Notes can be created and will travel down a line until they hit the bottom of the display.
-
-### Day 3
-Create logic for the backend.  Create methods that allow for Notes to be caught and that update state based on whether they are caught or not.  Also create logic for the randomization of Notes.
-
-- Sprite should be able to catch and miss Notes based on use of the spacebar.
-- Notes should appear in a random order but at a specific interval.
-- Catches and misses should update the state (element colors).
-
-### Day 4
-Install music that will play upon initialization of a new game, and should stay consistent with Note appearance/collision.  Install a pause button that pauses music.  Finish styling of page and instructions.
-
-- Music plays upon game start and pauses with game pause.
-- Game and instructions appear properly and are styled appropriately.
-- Music follows Note creation & collision.
-
-## Bonus
-
-- Easy, medium, and hard modes that offer different songs and speeds.
-- Additional Note patterns and lines.
-- Moving background element that denotes a sensation of movement.
-- Songs that autoform based on loops that play upon catching each Note.
+Finally, instead of a music file playing over the entire game, using music loops based on the moments when energy packets are caught would allow the player to essentially create the song that is supposed to play with their gameplay.  This would likely require dynamic modifications to the speed of the music loops as the game speed increases, but the result would be much more rewarding.
