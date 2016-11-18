@@ -52,28 +52,64 @@ table {
 
 #title {
   display: block;
-  margin: -50px auto -30px auto;
+  margin: -60px auto -40px auto;
 }
 
 body {
   background-color: black;
   background-image: url("site_background2.png");
   background-position: center;
+  /*background-size: constrain;*/
   position: fixed;
   width: 100%;
   height: 100%;
 }
 
+#title_div {
+  background-color: black;
+  background-image: url("tron_top_panel.png");
+  background-size: contain;
+  background-position: bottom;
+  border: 3px solid #18CAE6;
+}
+
+/*#background_div {
+  position: fixed;
+  background-color: black;
+  z-index: 5;
+  top: 20%;
+  width: 100%;
+  bottom: 100%;
+}*/
+
 #canvas {
   display: block;
   margin: auto;
+  border: 2px solid #303030;
+  border-bottom: 1px solid #303030;
+
+  /*float:left;*/
   /*position: relative;*/
   /*position: fixed;
-  width: 100%;
-  height: 100%;*/
+  width: 399px;
+  height: 500px;
+  left: 34.5%;*/
 
-  -webkit-box-shadow: 0 0 5px 5px #18CAE6;
-  box-shadow: 0 0 5px 5px #18CAE6;
+  /*-webkit-box-shadow: 0 0 5px 5px #303030;
+  box-shadow: 0 0 5px 5px #303030;*/
+}
+
+#controls {
+  position: fixed;
+  /*margin: 0 auto 0 auto;*/
+  width: 100%;
+  top: 608px;
+  bottom: 0;
+  background-color: black;
+  background-image: url("controls.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 2px solid #303030;
 }
 
 .instructions {
